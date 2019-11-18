@@ -1,18 +1,34 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm6 md6>
-        <v-select
-          v-model="organizationId"
-          :items="organizations"
-          label="Select Organization"
-        ></v-select>
-        <v-btn :dark="darkStatus" :color="baseColor" block @click="updateDetails">
-          Update Details
-        </v-btn>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Settings</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <select class="form-control custom-select"
+                    v-model="organizationId"
+                  >
+                    <option value="">Select Organization</option>
+                    <option v-for="org in organizations" :key="`'org'${org.id}`" :value="org.value">{{ org.text }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block"
+                    @click="updateDetails"
+                  >Update Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">

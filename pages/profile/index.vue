@@ -1,68 +1,58 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md6>
-        <v-card class="elevation-12">
-          <v-toolbar :dark="darkStatus" :height="baseHeight" :color="baseColor">
-            <v-toolbar-title>My Profile [{{ user.roles[0].name }}]</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-avatar
-                size="120px"
-                v-if="form.image_path || imageBase64"
-              >
-                <img
-                  :src="imageBase64 ? imageBase64 :  (mediaUrl + form.image_path)"
-                  alt="Profile Image"
-                >
-              </v-avatar>
-              <v-text-field 
-                label="Select Image" 
-                @click='pickFile' 
-                v-model='imageName' 
-                prepend-icon='attach_file'
-              ></v-text-field>
-              <input
-                type="file"
-                style="display: none"
-                ref="image"
-                accept="image/*"
-                @change="onFilePicked"
-              >
-              <v-text-field 
-                :error-messages="errors.name"
-                prepend-icon="person" 
-                name="name" 
-                label="Name"
-                v-model="form.name" 
-                type="text"></v-text-field>
-              <v-text-field 
-                :error-messages="errors.email"
-                prepend-icon="email" 
-                name="email" 
-                label="Email" 
-                v-model="form.email"
-                type="text"></v-text-field>
-              <v-text-field 
-                :error-messages="errors.phone"
-                prepend-icon="phone" 
-                name="phone" 
-                label="Phone" 
-                v-model="form.phone"
-                type="number"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn :dark="darkStatus" to="/reset-password" :color="baseColor">Reset Password</v-btn>
-            <v-btn :dark="darkStatus" @click="store" :color="baseColor">Update Profile</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">My Profile [{{ user.roles[0].name }}]</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-label">Admin name</label>
+                  <input type="text" class="form-control" placeholder="Enter name"
+                    v-model="form.name"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.name"
+                  >{{ errors.name[0] }}</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" placeholder="Enter email"
+                    v-model="form.email"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.email"
+                  >{{ errors.email[0] }}</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="number" class="form-control" placeholder="Enter phone"
+                    v-model="form.phone"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.phone"
+                  >{{ errors.phone[0] }}</span>
+                </div>
+                <div class="form-footer">
+                  <nuxt-link class="btn btn-primary" to="/reset-password"
+                    @click="store"
+                  >
+                    Reset Password
+                  </nuxt-link>
+                  <button class="btn btn-primary"
+                    @click="store"
+                  >Update Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">

@@ -10,15 +10,25 @@ module.exports = {
     title: pkg.name,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
+      { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext' },
+      { rel: 'stylesheet', href: '/css/dashboard.css' },
+      { rel: 'stylesheet', href: '/plugins/charts-c3/plugin.css' },
+      { rel: 'stylesheet', href: '/plugins/maps-google/plugin.css' },
     ],
     script: [
       { src: '/javascripts/ckeditor/ckeditor.js' },
+      { src: '/js/require.min.js' },
+      { src: '/js/dashboard.js' },
+      { src: '/plugins/charts-c3/plugin.js' },
+      { src: '/plugins/maps-google/plugin.js' },
+      { src: '/plugins/input-mask/plugin.js' },
     ]
   },
 
@@ -35,7 +45,6 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/style/app.styl'
   ],
 
   router: {
@@ -50,7 +59,6 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify',
     '@/plugins/mixins/validation',
     '@/plugins/mixins/auth',
     '@/plugins/mixins/settings',
@@ -92,8 +100,10 @@ module.exports = {
   //   baseURL: 'http://localhost:8080/api'
   // },
   axios: {
-    // baseURL: 'http://localhost:8080/api'
-    baseURL: 'http://aaibuzz.com:8088/api'
+    // baseURL: 'http://192.168.1.9:8080/api'
+    // baseURL: 'http://192.168.1.126:8080/api'
+    // baseURL: 'http://aaibuzz.com:8088/api'
+    baseURL: 'http://localhost:8080/api'
   },
   
 

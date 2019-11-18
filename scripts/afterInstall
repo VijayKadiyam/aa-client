@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /var/www/html/hyperx/client 
+cd /var/www/html/aa/client 
 
 #npm install.
 

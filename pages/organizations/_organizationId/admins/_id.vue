@@ -1,51 +1,57 @@
 <template>
-  <v-container fluid fill-height>
-    <back-button 
-      title="Go Back To Organizations"
-      link="/organizations"
-    ></back-button>
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md8>
-        <v-card class="elevation-12">
-          <v-toolbar :dark="darkStatus" :height="baseHeight" :color="baseColor">
-            <v-toolbar-title>Update admin details of {{ org.name }}</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-text-field 
-                :error-messages="errors.name"
-                prepend-icon="person" 
-                name="name" 
-                label="Name"
-                v-model="form.name" 
-                type="text"
-              ></v-text-field>
-              <v-text-field 
-                :error-messages="errors.email"
-                prepend-icon="email" 
-                name="email" 
-                label="Email" 
-                v-model="form.email"
-                type="text"
-              ></v-text-field>
-              <v-text-field 
-                :error-messages="errors.phone"
-                prepend-icon="phone" 
-                name="phone" 
-                label="Phone" 
-                v-model="form.phone"
-                type="number"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn :dark="darkStatus" @click="store" :color="baseColor">Update Admin</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Add admin details of {{ org.name }}</h3>
+            &nbsp;&nbsp;&nbsp;
+            <nuxt-link class="btn btn-primary btn-sm" to="/organizations">
+              GO Back
+            </nuxt-link>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-label">Admin name</label>
+                  <input type="text" class="form-control" placeholder="Enter name"
+                    v-model="form.name"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.name"
+                  >{{ errors.name[0] }}</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" placeholder="Enter email"
+                    v-model="form.email"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.email"
+                  >{{ errors.email[0] }}</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="number" class="form-control" placeholder="Enter phone"
+                    v-model="form.phone"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.phone"
+                  >{{ errors.phone[0] }}</span>
+                </div>
+                <div class="form-footer">
+                  <button class="btn btn-primary btn-block"
+                    @click="store"
+                  >Update Admin</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">

@@ -1,60 +1,63 @@
 <template>
-  <section>
-    <span class="title">Manage Organizations</span>
-    <v-btn
-      small
-      fab
-      to='/organizations/create'
-      :color="baseColor"
-      title="Add New Organization"
-      :dark="darkStatus"
-    >
-      <v-icon>
-        add
-      </v-icon>
-    </v-btn>
-    <v-data-table
-      :headers="headers"
-      :items="items"
-      :loading="loading"
-      class="elevation-1"
-    >
-      <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.id }}</td>
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-left">
-          <v-btn small
-            :dark="darkStatus"
-            :color="baseColor"
-            :to="`/organizations/${props.item.id}/admins/create`"
-            v-if="props.item.users.length == 0"
-            title="Add Admin's Details"
-          >
-            <v-icon>add</v-icon>Add Admin Details
-          </v-btn>
-          <span
-            v-else
-          >
-            <v-btn fab small
-              :dark="darkStatus"
-              :color="baseColor"
-              :to="`/organizations/${props.item.id}/admins/${props.item.users[0].id}`"
-              title="Edit Admin's Details"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
-            <b>Name: </b>{{ props.item.users[0].name }} | <b>Email: </b>Email: {{ props.item.users[0].email }} | <b>Phone: </b>{{ props.item.users[0].phone }}
-          </span>
-        </td>
-        <td class="text-xs-left">
-          <nuxt-link :to="`/organizations/${props.item.organizationId}`">
-            <v-icon>edit</v-icon>
-          </nuxt-link>
-        </td>
-      </template>
-    </v-data-table>
-  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Manage Organizations</h3>
+            &nbsp;&nbsp;&nbsp;
+            <nuxt-link class="btn btn-primary btn-sm" to="/organizations/create">
+              Add New
+            </nuxt-link>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table card-table table-striped table-vcenter">
+                <thead>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Organization</th>
+                    <th>Admin Details</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(org, i) in items"
+                    :key="`org{i}`"
+                  >
+                    <td>{{ org.id }}</td>
+                    <td>
+                      {{ org.name }}<br>
+                      {{ org.address }}
+                    </td>
+                    <td v-if="org.users.length == 0">
+                      <nuxt-link class="btn btn-primary btn-sm" :to="`/organizations/${org.organizationId}/admins/create`">
+                        Add Admin Details
+                      </nuxt-link>
+                    </td>
+                    <td v-else>
+                      <nuxt-link class="btn btn-primary btn-sm" :to="`/organizations/${org.organizationId}/admins/${org.users[0].id}`">
+                        Edit Admin Details
+                      </nuxt-link>
+                      <br>
+                      Name: {{ org.users[0].name }} <br>
+                      Email: {{ org.users[0].email }} <br>
+                      Phone: {{ org.users[0].phone }} <br>
+                    </td>
+                    <td class="w-1">
+                      <nuxt-link class="icon" :to="`/organizations/${org.organizationId}`">
+                        <i class="fe fe-edit"></i>
+                      </nuxt-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">
@@ -88,7 +91,8 @@ export default {
         id: i+1,
         organizationId: org.id,
         name: org.name,
-        users: org.users
+        users: org.users,
+        address: org.address
       })
     })
     this.loading = false

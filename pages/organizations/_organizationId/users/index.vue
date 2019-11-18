@@ -1,98 +1,54 @@
 <template>
-  <section>
-    <span class="title">Manage Users</span>
-    <v-btn
-      small
-      fab
-      :to="`/organizations/${organization.value}/users/create`"
-      :color="baseColor"
-      title="Add New Employee"
-      :dark="darkStatus"
-    >
-      <v-icon>
-        add
-      </v-icon>
-    </v-btn>
-    <v-checkbox :color="baseColor" hide-details 
-      v-model="checkDeleted"
-      value="checkedDeleted"
-      label="Add deleted employees data"
-      @change="updateList"
-    ></v-checkbox>
-    <v-data-table
-      :headers="headers"
-      :items="employees"
-      :loading="loading"
-      class="elevation-1"
-      hide-actions
-    >
-      <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-      <template slot="items" slot-scope="props">
-        <td>{{ props.index + 1 }}</td>
-        <td>{{ props.item.name }}</td>
-        <td>{{ props.item.email }}<br>{{ props.item.phone }}</td>
-        <td>{{ props.item.address }}</td>
-        <td>{{ props.item.can_send_email == 1 ? 'Yes' : 'No' }}</td>
-        <td>{{ props.item.active == 1 ? 'ACTIVE' : 'IN ACTIVE' }}</td>
-        <td class="text-xs-left">
-          <v-layout row wrap>
-            <v-flex xs12 sm3>
-              <nuxt-link :to="`/organizations/${organization.value}/users/${props.item.id}`">
-                <v-btn flat icon 
-                  :color="baseColor"
-                  :dark="darkStatus">
-                  <v-icon>edit</v-icon>
-                </v-btn>
-              </nuxt-link>
-            </v-flex>
-            <v-flex xs12 sm3 pl-2>
-              <v-btn flat icon color="pink" @click.stop="props.item.dialogDelete = true">
-                <v-icon>delete</v-icon>
-              </v-btn>
-            </v-flex>
-          </v-layout>
-
-          <v-dialog
-            v-model="props.item.dialogDelete"
-            max-width="290"
-          >
-            <v-card>
-              <v-card-title class="headline">Delete User?</v-card-title>
-
-              <v-card-text>
-                Are you sure you want to delete the user.
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn
-                  color="green darken-1"
-                  flat="flat"
-                  @click="props.item.dialogDelete = false"
-                >
-                  Cancel
-                </v-btn>
-
-                <v-btn
-                  color="green darken-1"
-                  flat="flat"
-                  @click="deleteUser(props.item.id)"
-                >
-                  Yes
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </td>
-      </template>
-    </v-data-table>
-  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Manage Users</h3>
+            &nbsp;&nbsp;&nbsp;
+            <nuxt-link class="btn btn-primary btn-sm" :to="`/organizations/${organization.value}/users/create`">
+              Add New
+            </nuxt-link>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table card-table table-striped table-vcenter">
+                <thead>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Name</th>
+                    <th>Email/Phone</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(emp, i) in employees"
+                    :key="`emp${i}`"
+                  >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.email }}<br>{{ emp.phone }}</td>
+                    <td>{{ emp.active == 1 ? 'ACTIVE' : 'IN ACTIVE' }}</td>
+                    <td class="w-1">
+                      <nuxt-link class="icon" :to="`/organizations/${organization.value}/users/${emp.id}`">
+                        <i class="fe fe-edit"></i>
+                      </nuxt-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: 'ManageEmployees',
+  name: 'ManageUsers',
   async asyncData({$axios, params}) { 
     let employees = await $axios.get(`/users?role_id=3`);
     employees = employees.data.data
@@ -117,7 +73,6 @@ export default {
       },
       { text: 'Email/Phone', value: 'phone' },
       { text: 'Address', value: 'address' },
-      { text: 'Can Send Email', value: 'can_send_email' },
       { text: 'Status', value: 'active' },
       { text: 'Action', value: '' }
     ],

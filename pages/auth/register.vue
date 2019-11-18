@@ -1,71 +1,46 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md6>
-        <v-card class="elevation-12">
-          <v-toolbar :dark="darkStatus" :height="baseHeight" :color="baseColor">
-            <v-toolbar-title>Register</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-text-field 
-                :error-messages="errors.name"
-                prepend-icon="person" 
-                name="name" 
-                label="Name"
-                v-model="form.name" 
-                type="text"></v-text-field>
-              <v-text-field 
-                :error-messages="errors.email"
-                prepend-icon="email" 
-                name="email" 
-                label="Email" 
-                v-model="form.email"
-                type="text"></v-text-field>
-              <v-text-field 
-                :error-messages="errors.phone"
-                prepend-icon="phone" 
-                name="phone" 
-                label="Phone" 
-                v-model="form.phone"
-                type="number"></v-text-field>
-              <v-text-field 
-                :error-messages="errors.password"
-                id="password" 
-                prepend-icon="lock" 
-                name="password" 
-                label="Password" 
-                v-model="form.password"
-                type="password"></v-text-field>
-              <v-text-field
-                id="password_confirmation" 
-                prepend-icon="lock_open" 
-                name="password_confirmation" 
-                label="Confirm Password" 
-                v-model="form.password_confirmation"
-                type="password"></v-text-field>
-              <v-select
-                :error-messages="errors.role_id"
-                v-model="form.role_id"
-                :items="roles"
-                label="Role"
-              ></v-select>
-              <v-select
-                :error-messages="errors.organization_id"
-                v-model="form.organization_id"
-                :items="organizations"
-                label="Organization"
-              ></v-select>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn :dark="darkStatus" @click="register" :color="baseColor">Register</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="page">
+    <div class="page-single">
+      <div class="container">
+        <div class="row">
+          <div class="col col-login mx-auto">
+            <div class="text-center mb-6">
+              <img src="/brand/logo.png" class="h-6" alt="">
+            </div>
+            <form class="card" action="" method="post">
+              <div class="card-body p-6">
+                <div class="card-title">Create new account</div>
+                <div class="form-group">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email address</label>
+                  <input type="email" class="form-control" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" />
+                    <span class="custom-control-label">Agree the <a href="terms.html">terms and policy</a></span>
+                  </label>
+                </div>
+                <div class="form-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Create new account</button>
+                </div>
+              </div>
+            </form>
+            <div class="text-center text-muted">
+              Already have account? <a href="./login.html">Sign in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">

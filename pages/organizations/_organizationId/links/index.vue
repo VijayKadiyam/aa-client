@@ -21,6 +21,7 @@
                 <thead>
                   <tr>
                     <th>Sr. No.</th>
+                    <th>Image Path</th>
                     <th>Link</th>
                     <th>Actions</th>
                   </tr>
@@ -30,6 +31,9 @@
                     :key="`link${i}`"
                   >
                     <td>{{ i + 1 }}</td> 
+                    <td>
+                      <img v-if="link.image_path" width="100" height="100" :src="`${mediaUrl}${link.image_path}`">
+                    </td>
                     <td>{{ link.link }}</td>
                     <td class="w-1">
                       <nuxt-link class="icon" :to="`/organizations/${organization.value}/links/${link.id}`">
@@ -42,7 +46,6 @@
               <br>
               <br>
               </div>
-              
             </div>
           </div>
         </div>

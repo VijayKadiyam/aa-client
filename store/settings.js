@@ -7,7 +7,7 @@ export const state = () => ({
     text: '',
     time_zone: ''
   },
-  mediaUrl: 'http://crm.firststepsolutions.in:8080/storage/'
+  mediaUrl: 'https://aaibuzz.s3.ap-south-1.amazonaws.com/appadda/'
 })
 
 export const getters = {

@@ -19,7 +19,7 @@
                     v-model="form.category_id"
                   >
                     <option value="">Select category</option>
-                    <option v-for="type in types" :key="`'type'${type.id}`" :value="type.value">{{ type.text }}</option>
+                    <option v-for="(type, i) in types" :key="`type${i}`" :value="type.value">{{ type.text }}</option>
                   </select>
                   <span class="help-block" 
                     v-if="errors.name"
@@ -34,6 +34,15 @@
                     v-if="errors.link"
                   >{{ errors.link[0] }}</span>
                 </div>
+                <div class="form-group">
+                  <label class="form-label">Image</label>
+                  <input 
+                    type="file" 
+                    ref="file1"
+                    accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*"
+                  >
+                </div>
+                <img v-if="form.image_path" width="100%" height="100" :src="`${mediaUrl}${form.image_path}`">
                 <div class="form-footer">
                   <button class="btn btn-primary btn-block"
                     @click="store"
@@ -74,7 +83,27 @@ export default {
   methods: {
     async store() {
       let user = await this.$axios.patch(`/links/${this.form.id}`, this.form)
+      await this.handleFileUpload();
       this.$router.push(`/organizations/${this.organization.value}/links`);
+    },
+    async handleFileUpload() {
+      this.picture1 = this.$refs.file1 ? this.$refs.file1.files[0] : ''
+      let formData = new FormData();
+      formData.append('id', this.form.id);
+      formData.append('image1', this.picture1);
+      await this.$axios.post('upload_link_image', formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(data => {
+        // this.filePath = data.data
+        console.log(data);
+      })
+      .catch(function(){
+        console.log('FAILURE!!');
+      });
     },
   }
 }

@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(service, i) in services"
-                    :key="`service{i}`"
+                    :key="`service${i}`"
                   >
                     <td>{{ i + 1 }}</td> 
                     <td>{{ service.name }}</td> 

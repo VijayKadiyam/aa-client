@@ -26,6 +26,15 @@
                   >{{ errors.category_id[0] }}</span>
                 </div>
                 <div class="form-group">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter name"
+                    v-model="form.name"
+                  >
+                  <span class="help-block" 
+                    v-if="errors.name"
+                  >{{ errors.name[0] }}</span>
+                </div>
+                <div class="form-group">
                   <label class="form-label">Link</label>
                   <input type="text" class="form-control" placeholder="Enter link"
                     v-model="form.link"

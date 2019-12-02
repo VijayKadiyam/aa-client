@@ -10,7 +10,10 @@
               Add New
             </nuxt-link>
           </div>
-          <div class="card-body">
+          <div v-if="loading">
+            Loading...
+          </div>
+          <div class="card-body" v-else>
             <div class="table-responsive">
               <div
                 v-for="(category, c) in categories"
@@ -41,6 +44,8 @@
                       <nuxt-link class="icon" :to="`/organizations/${organization.value}/links/${link.id}`">
                         <i class="fe fe-edit"></i>
                       </nuxt-link>
+                      &nbsp;&nbsp;
+                      <span class="icon" @click="deleteLink(link.id)"><i class="fe fe-delete"></i></span>
                     </td>
                   </tr>
                 </tbody>
@@ -59,13 +64,6 @@
 <script type="text/javascript">
 export default {
   name: 'ManageLinks',
-  async asyncData({$axios, params}) { 
-    let categories = await $axios.get(`/categories`);
-    categories = categories.data.data
-    return {
-      categories: categories,
-    }
-  },
   data:() =>  ({
     headers: [
       { text: 'Sr No', value: 'sr_no' },
@@ -82,13 +80,26 @@ export default {
     ],
     loading: true,
     dialogDelete: false,
-    checkDeleted: null
+    checkDeleted: null,
+    categories: [],
   }),
-  mounted() {
-    this.loading = false
+  created() {
+    this.getCategories();
   },
   methods: {
-    
+    async getCategories() {
+      this.loading = true
+      let categories = await this.$axios.get(`/categories`);
+      this.categories = categories.data.data
+      this.loading = false
+    },
+    async deleteLink(linkId) {
+      var r = confirm("Are you sure you want to delete the link!");
+      if (r == true) {
+        await this.$axios.delete(`/links/${linkId}`)
+      }
+      this.getCategories()
+    }
   }
 }
 </script>

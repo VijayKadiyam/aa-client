@@ -101,7 +101,8 @@ module.exports = {
   // },
   axios: {
     // baseURL: 'http://localhost:8080/api'
-    baseURL: 'http://13.232.172.243:8080/api'
+    // baseURL: 'http://13.232.172.243:8080/api'
+    baseURL: 'https://api.appadda.aaibuzz.com/api'
   },
   
 

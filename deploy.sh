@@ -5,4 +5,4 @@ npm run build
 
 pm2 delete npm 
 
-pm2 start npm -- start
+pm2 start npm --name aa -- start

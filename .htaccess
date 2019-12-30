@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteCond %{SERVER_PORT} 80
-RewriteRule ^index.php(.*) http://localhost:3000/$1 [P,L]
-RewriteRule (.*) http://localhost:3000/$1 [P,L]
+RewriteRule ^index.php(.*) http://localhost:3001/$1 [P,L]
+RewriteRule (.*) http://localhost:3001/$1 [P,L]

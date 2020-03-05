@@ -7,7 +7,9 @@ export const state = () => ({
     text: '',
     time_zone: ''
   },
-  mediaUrl: 'https://aaibuzz.s3.ap-south-1.amazonaws.com/appadda/'
+  // mediaUrl: 'https://aaibuzz.s3.ap-south-1.amazonaws.com/appadda/'
+  // mediaUrl: 'http://localhost:8080/storage/appadda/'
+  mediaUrl: 'http://localhost:8080/storage/appadda/'
 })
 
 export const getters = {

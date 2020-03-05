@@ -9,7 +9,7 @@ export const state = () => ({
   },
   // mediaUrl: 'https://aaibuzz.s3.ap-south-1.amazonaws.com/appadda/'
   // mediaUrl: 'http://localhost:8080/storage/appadda/'
-  mediaUrl: 'http://localhost:8080/storage/appadda/'
+  mediaUrl: 'https://api.appadda.aaibuzz.com/storage/appadda/'
 })
 
 export const getters = {

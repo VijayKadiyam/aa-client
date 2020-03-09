@@ -21,6 +21,9 @@
                   <button class="btn btn-primary btn-block"
                     @click="updateDetails"
                   >Update Details</button>
+                  <nuxt-link to="/versions">
+                    Add New Version
+                  </nuxt-link>
                 </div>
               </div>
             </div>

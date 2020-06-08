@@ -4,5 +4,6 @@ cd /var/www/vhosts/appadda/appadda-client
 
 npm run build
 
+
 pm2 delete appadda 
 pm2 start npm --name appadda -- start

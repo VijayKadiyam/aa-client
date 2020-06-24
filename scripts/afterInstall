@@ -1,8 +1,10 @@
 #!/bin/bash
-cd /var/www/html/aa/client 
+export PATH="$PATH:"/usr/local/bin/
+cd /var/www/vhosts/appadda/appadda-client
 
-#npm install.
+npm run build
 
-#npm run build
-#pm2 restart npm -- start
+
+pm2 delete appadda 
+pm2 start npm --name appadda -- start
  
